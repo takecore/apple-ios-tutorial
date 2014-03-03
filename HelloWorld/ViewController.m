@@ -14,6 +14,8 @@
 
 @implementation ViewController
 
+@synthesize userName = _userName;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -26,4 +28,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField
+{
+    if (theTextField == self.myTextField)
+    {
+        [theTextField resignFirstResponder];
+    }
+    return YES;
+}
+
+- (IBAction)changeGreeting:(id)sender
+{
+    self.userName = self.myTextField.text;
+    NSString *nameString = self.userName;
+    
+    if ([nameString length] == 0) {
+        
+        nameString = @"World";
+    }
+    NSString *greeting = [[NSString alloc] initWithFormat:@"Hello, %@!", nameString];
+    self.label.text = greeting;
+    
+}
 @end
